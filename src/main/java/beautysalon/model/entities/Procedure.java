@@ -3,6 +3,7 @@ package beautysalon.model.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,10 +17,15 @@ public class Procedure {
     @Column(name = "procedure_id")
     private Integer id;
 
+    @Column(name = "procedure_name_ukr")
+    private String nameUkr;
+
+    @Column(name = "procedure_name_en")
+    private String nameEn;
+
     @Column(name = "procedure_price", nullable = false)
     private Long price;
 
-    @Column(name = "procedure_time", nullable = false)
-    private Integer time;
-
+    @OneToMany(mappedBy = "procedureId")
+    private List<Appointment> appointment;
 }

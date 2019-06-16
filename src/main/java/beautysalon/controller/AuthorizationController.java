@@ -2,19 +2,23 @@ package beautysalon.controller;
 
 import beautysalon.model.entities.User;
 import beautysalon.model.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Map;
-import java.util.Optional;
+import java.util.Objects;
 
 @Controller
-public class UserController {
-    @Autowired
+public class AuthorizationController {
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     private UserRepository userRepository;
+
+    public AuthorizationController(BCryptPasswordEncoder bCryptPasswordEncoder,
+                                   UserRepository userRepository) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/login")
     public String login() {
@@ -28,14 +32,16 @@ public class UserController {
 
 
     @PostMapping("/registration")
-    public String signUp(User user, Map<String, Object> model) {
-        if (userRepository.findByLogin(user.getLogin()).isPresent()) {
-            model.put("message", "User already exists!");
+    public String signUp(User user) {
+
+        if (Objects.nonNull(userRepository.findByLogin(user.getLogin()))) {
             return "registration";
         } else {
-            user.setRole("Client");
+            user.setRole("client");
             user.setActive(true);
-            System.out.println(user.getLogin() + " " + user.getPassword() + " " + user.getActive());
+            String hashPassword =  bCryptPasswordEncoder.encode(user.getPassword());
+            user.setPassword(hashPassword);
+
             userRepository.save(user);
             return "redirect:/login";
         }
