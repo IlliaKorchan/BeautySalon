@@ -27,7 +27,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findByLogin(s);
     }
 
-    public List<User> getMasters(String role) {
+    public List<User> getUsersByRole(String role) {
         return userRepository.findAllByRole(role);
     }
 
@@ -37,5 +37,13 @@ public class UserService implements UserDetailsService {
 
     public User findById(Integer id) {
         return userRepository.findById(id).get();
+    }
+
+    public void delete(User user) {
+        userRepository.delete(user);
+    }
+
+    public void updatePassword(User user, String newPassword) {
+        userRepository.updatePassword(newPassword, user.getId());
     }
 }

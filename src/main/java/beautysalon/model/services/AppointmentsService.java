@@ -6,6 +6,7 @@ import beautysalon.model.repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,5 +39,11 @@ public class AppointmentsService {
             correctList.add(appointment);
         }
         return correctList;
+    }
+
+    public List<Appointment> getMasterAppointments (User master, String date) {
+        LocalDate selectedDate = LocalDate.parse(date);
+        System.out.println(selectedDate);
+        return appointmentRepository.findAllByMasterIdAndDate(master, selectedDate);
     }
 }

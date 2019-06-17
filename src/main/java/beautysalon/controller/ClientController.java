@@ -3,7 +3,6 @@ package beautysalon.controller;
 import beautysalon.model.entities.Review;
 import beautysalon.model.entities.User;
 import beautysalon.model.repositories.ReviewRepository;
-import beautysalon.model.repositories.UserRepository;
 import beautysalon.model.services.AppointmentsService;
 import beautysalon.model.services.ProceduresService;
 import beautysalon.model.services.ReviewsService;
@@ -15,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 
@@ -62,7 +60,7 @@ public class ClientController {
     public String makeAppointment(Model model,
 //                                  List<WorkingDay> workingDays,
                                   String surnameEn) {
-        model.addAttribute("masters", userService.getMasters("master"));
+        model.addAttribute("masters", userService.getUsersByRole("master"));
         model.addAttribute("surnameEn", surnameEn);
         model.addAttribute("workingDays", userService.getAvailableMasterWorkingDays(surnameEn));
         return "client-master-schedule";
@@ -92,7 +90,7 @@ public class ClientController {
 
     @GetMapping("/make-review")
     public String makeReview(Model model) {
-        model.addAttribute("masters", userService.getMasters("master"));
+        model.addAttribute("masters", userService.getUsersByRole("master"));
 
         return "/make-review";
     }
