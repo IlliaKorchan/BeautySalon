@@ -20,8 +20,9 @@ public class WorkingDay {
     @Column(name = "working_day_id")
     private Integer id;
 
-    @Column(name = "working_day_master_id", nullable = false)
-    private Integer masterId;
+    @ManyToOne
+    @JoinColumn(name = "working_day_master_id", nullable = false)
+    private User masterId;
 
     @Column(name = "working_day_date", nullable = false)
     private LocalDate date;

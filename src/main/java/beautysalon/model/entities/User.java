@@ -57,6 +57,9 @@ public class User implements UserDetails{
     @OneToMany(mappedBy = "masterId")
     private List<Appointment> masterAppointments;
 
+    @OneToMany(mappedBy = "masterId")
+    private List<WorkingDay> workingDays;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return  Collections.singletonList(this::getRole);

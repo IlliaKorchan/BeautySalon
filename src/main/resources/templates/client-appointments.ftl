@@ -10,9 +10,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
 
-    <title>
-        <fmt:message key="navbar.my.appointments"/>
-    </title>
+    <title>My appointments</title>
 </head>
 
 <body>
@@ -51,11 +49,11 @@
     <tbody>
     <#list clientAppointments as appointment>
     <tr>
-        <td><li>${appointment.masterId.surnameEn}</li>
-            <li>${appointment.date}</li>
-            <li>${appointment.time}</li>
-            <li>${appointment.procedureId.nameEn}</li>
-            <li>${appointment.procedureId.price}</li>
+        <td><li>Master: ${appointment.masterId.surnameEn}</li>
+            <li>Date: ${appointment.date}</li>
+            <li>Time: ${appointment.time}</li>
+            <li>Procedure: ${appointment.procedureId.nameEn}</li>
+            <li>Price: ${appointment.procedureId.price} UAH</li>
             <hr>
             <br/>
     </tr>

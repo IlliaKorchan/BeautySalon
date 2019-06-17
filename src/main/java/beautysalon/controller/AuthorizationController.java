@@ -7,7 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
+import java.util.ResourceBundle;
+
+import static beautysalon.StringContainer.PAGE_MAIN_BUTTON;
 
 @Controller
 public class AuthorizationController {
@@ -20,6 +25,14 @@ public class AuthorizationController {
         this.userRepository = userRepository;
     }
 
+    @GetMapping("/")
+    public String homePage(Map<String, Object> model) {
+        ResourceBundle bundle = ResourceBundle.getBundle("messages", new Locale("uk", "UA"));
+        model.put("bundle", bundle);
+        model.put("main-button", PAGE_MAIN_BUTTON);
+        return "home-page";
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -29,7 +42,6 @@ public class AuthorizationController {
     public String registration() {
         return "registration";
     }
-
 
     @PostMapping("/registration")
     public String signUp(User user) {

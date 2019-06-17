@@ -21,7 +21,7 @@
         </a>
         <a href="/client/appointments" class="navbar-brand letter"
            style="color: deeppink; font-size:11pt">My appointments</a>
-        <a href="/client/master-schedule" class="navbar-brand letter"
+        <a href="/client/make-appointment" class="navbar-brand letter"
            style="color: deeppink; font-size:11pt" >Make an appointment</a>
         <a href="/client/procedures" class="navbar-brand letter"
            style="color: deeppink; font-size:11pt" >Procedures</a>
@@ -34,14 +34,6 @@
             </button>
             </p>
         </form>
-        <#--<form  method="get" action="${pageContext.request.contextPath}/change-language/salon/menu">-->
-            <#--<label for="language"></label>-->
-            <#--<select id="language" name="language"-->
-                    <#--onchange="submit()" style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">-->
-                <#--<option value="en" ${language == 'en' ? 'selected' : ''} style="color: deeppink">English</option>-->
-                <#--<option value="uk" ${language == 'uk' ? 'selected' : ''} style="color: deeppink">Українська</option>-->
-            <#--</select>-->
-        <#--</form>-->
     </nav>
     <br>
     <p align="center" style="color: deeppink">
