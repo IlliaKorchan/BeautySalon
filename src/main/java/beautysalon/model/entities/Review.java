@@ -5,7 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -20,11 +21,13 @@ public class Review {
     @Column(name = "review_date")
     private LocalDate date;
 
-    @Column(name = "review_client_id")
-    private Integer clientId;
+    @ManyToOne
+    @JoinColumn(name = "review_client_id")
+    private User clientId;
 
-    @Column(name = "review_master_id", nullable = false)
-    private Integer appointmentId;
+    @ManyToOne
+    @JoinColumn(name = "review_master_id", nullable = false)
+    private User masterId;
 
     @Column(name = "review_text")
     private String text;

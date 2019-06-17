@@ -63,9 +63,7 @@
             <#list masters as m>
                 <option value="${m.surnameEn}">${m.surnameEn}</option>
             </#list>
-            <#--<c:forEach var="master" items="${requestScope.masters}">-->
-                <#--<option value="${master.name}" style="color: deeppink">${master.name}</option>-->
-            <#--</c:forEach>-->
+
         </select>
         <br><br>
         <input type="hidden" name="_csrf" value="${_csrf.token}" />

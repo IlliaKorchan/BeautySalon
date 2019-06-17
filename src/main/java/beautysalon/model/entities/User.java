@@ -9,7 +9,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -59,6 +60,12 @@ public class User implements UserDetails{
 
     @OneToMany(mappedBy = "masterId")
     private List<WorkingDay> workingDays;
+
+    @OneToMany(mappedBy = "clientId")
+    private List<Review> clientReviews;
+
+    @OneToMany(mappedBy = "masterId")
+    private List<Review> masterReviews;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

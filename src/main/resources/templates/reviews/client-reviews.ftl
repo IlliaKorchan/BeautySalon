@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
     <html lang="en">
     <head>
         <!-- Required meta tags -->
@@ -10,7 +10,7 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
               crossorigin="anonymous">
 
-        <title>Main menu</title>
+        <title>Reviews</title>
     </head>
 
     <body>
@@ -36,28 +36,25 @@
         </form>
     </nav>
     <br>
-    <p align="center" style="color: deeppink">
-        Ukrainian name: ${user.nameUkr}<br>
-        English name: ${user.nameEn}<br>
-        Ukrainian surname: ${user.surnameUkr}<br>
-        English surname: ${user.surnameEn}<br>
-        Login: ${user.login}<br>
-        Gender: ${user.gender}<br>
-        Email: ${user.email}<br>
-        <br>
-        <form method="get" action="/change-password">
-            <input type="hidden" name="_csrf" value="${_csrf.token}" />
-            <p align="center"><button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
-        Change password
-    </button>
-    </p>
-    </form>
-    <form method="get" action="/delete-account">
-        <p align="center">
-            <button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
-                <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                Delete account
-            </button>
+
+    <table>
+        <tbody>
+    <#list reviews as review>
+    <tr>
+        <td><li>Date: ${review.date}</li>
+            <li>Master: ${review.masterId.surnameEn}</li>
+            <li>Text: ${review.text}</li>
+            <hr>
+            <br/>
+    </tr>
+    </#list>
+        </tbody>
+    </table>
+
+    <form method="get" action="/client/make-review">
+        <p align="center"><button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
+            Write a review
+        </button>
         </p>
     </form>
 

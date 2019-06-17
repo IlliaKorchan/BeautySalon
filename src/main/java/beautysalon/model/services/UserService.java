@@ -9,8 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,5 +33,9 @@ public class UserService implements UserDetailsService {
 
     public List<WorkingDay> getAvailableMasterWorkingDays(String surnameEn) {
         return workingDayRepository.findAllByMasterId(userRepository.findBySurnameEn(surnameEn));
+    }
+
+    public User findById(Integer id) {
+        return userRepository.findById(id).get();
     }
 }

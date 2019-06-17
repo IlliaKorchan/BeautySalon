@@ -10,7 +10,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
 
-    <title>My appointments</title>
+    <title>Procedure catalogue</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
     </a>
     <a href="/client/appointments" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt">My appointments</a>
-    <a href="/client/master-schedule" class="navbar-brand letter"
+    <a href="/client/make-appointment" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" >Make an appointment</a>
     <a href="/client/procedures" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" >Procedures</a>
@@ -39,30 +39,16 @@
 
 <table>
     <tbody>
-    <#list clientAppointments as appointment>
+    <#list procedures as procedure>
     <tr>
-        <td><li>Master: ${appointment.masterId.surnameEn}</li>
-            <li>Date: ${appointment.date}</li>
-            <li>Time: ${appointment.time}</li>
-            <li>Procedure: ${appointment.procedureId.nameEn}</li>
-            <li>Price: ${appointment.procedureId.price} UAH</li>
+        <td><li>Name: ${procedure.nameEn}</li>
+            <li>Price: ${procedure.price} UAH</li>
             <hr>
             <br/>
     </tr>
     </#list>
     </tbody>
 </table>
-
-<#--<c:forEach var="appointment" items="${requestScope.clientAppointments}">-->
-<#--<ul>-->
-<#--<li><fmt:message key="appointment.master.name"/>: <c:out value="${appointment.surname}"/></li>-->
-<#--<li><fmt:message key="appointment.date"/>: <c:out value="${appointment.date}"/></li>-->
-<#--<li><fmt:message key="appointment.time"/>: <c:out value="${appointment.time}"/></li>-->
-<#--<li><fmt:message key="appointment.procedure.name"/>: <c:out value="${appointment.procedureName}"/></li>-->
-<#--<li><fmt:message key="appointment.procedure.price"/>: <c:out value="${appointment.procedurePrice}"/> <fmt:message key="currency"/></li>-->
-<#--</ul>-->
-<#--<hr/>-->
-<#--</c:forEach>-->
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
