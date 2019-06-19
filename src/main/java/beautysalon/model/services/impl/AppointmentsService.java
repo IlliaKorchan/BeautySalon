@@ -1,8 +1,9 @@
-package beautysalon.model.services;
+package beautysalon.model.services.impl;
 
 import beautysalon.model.entities.Appointment;
 import beautysalon.model.entities.User;
 import beautysalon.model.repositories.AppointmentRepository;
+import beautysalon.model.services.AppointmentsProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +14,14 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class AppointmentsService {
+public class AppointmentsService implements AppointmentsProcessor {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
     public AppointmentsService() {
     }
 
-    public AppointmentsService(AppointmentRepository appointmentRepository) {
-        this.appointmentRepository = appointmentRepository;
-    }
-
+    @Override
     public List<Appointment> getClientAppointments (User client) {
         Map<Integer, Long> uniquePrices = new HashMap<>();
         List<Appointment> correctList = new ArrayList<>();
@@ -41,9 +39,12 @@ public class AppointmentsService {
         return correctList;
     }
 
+    @Override
     public List<Appointment> getMasterAppointments (User master, String date) {
         LocalDate selectedDate = LocalDate.parse(date);
-        System.out.println(selectedDate);
-        return appointmentRepository.findAllByMasterIdAndDate(master, selectedDate);
+
+        List<Appointment> list = appointmentRepository.findAllByMasterIdAndDate(master, selectedDate);
+        System.out.println(list.size());
+        return list;
     }
 }

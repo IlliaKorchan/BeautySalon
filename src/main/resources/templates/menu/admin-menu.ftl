@@ -23,7 +23,7 @@
            style="color: deeppink; font-size:11pt">Procedures</a>
         <a href="/admin/appointments" class="navbar-brand letter"
            style="color: deeppink; font-size:11pt" >Appointments</a>
-        <a href="/client/reviews" class="navbar-brand letter"
+        <a href="/admin/reviews" class="navbar-brand letter"
            style="color: deeppink; font-size:11pt" >Reviews</a>
         <form method="post" action="/logout">
             <input type="hidden"  name="_csrf" value="${_csrf.token}" />

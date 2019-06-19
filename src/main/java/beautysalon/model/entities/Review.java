@@ -1,5 +1,6 @@
 package beautysalon.model.entities;
 
+import beautysalon.controller.LocalDateConverter;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Review {
     @Column(name = "review_id")
     private Integer id;
 
+    @Convert(converter = LocalDateConverter.class)
     @Column(name = "review_date")
     private LocalDate date;
 

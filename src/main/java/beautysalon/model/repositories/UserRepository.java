@@ -14,9 +14,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findByLogin(String login);
     List<User> findAllByRole(String role);
     User findBySurnameEn(String surname);
-
-    @Modifying
-    @Query(value = "UPDATE users AS u SET u.user_password =? WHERE u.user_id = ?", nativeQuery = true)
-    void updatePassword(String password, Integer userId);
-
 }

@@ -45,13 +45,6 @@
         Gender: ${user.gender}<br>
         Email: ${user.email}<br>
         <br>
-        <form method="get" action="/change-password">
-            <input type="hidden" name="_csrf" value="${_csrf.token}" />
-            <p align="center"><button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
-        Change password
-    </button>
-    </p>
-    </form>
     <form method="get" action="/delete-account">
         <p align="center">
             <button class="btn btn-success" style="background-color: #FFA9EB" type="submit">

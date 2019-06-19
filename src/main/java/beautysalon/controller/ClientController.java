@@ -2,11 +2,15 @@ package beautysalon.controller;
 
 import beautysalon.model.entities.Review;
 import beautysalon.model.entities.User;
-import beautysalon.model.repositories.ReviewRepository;
-import beautysalon.model.services.AppointmentsService;
-import beautysalon.model.services.ProceduresService;
-import beautysalon.model.services.ReviewsService;
-import beautysalon.model.services.UserService;
+import beautysalon.model.entities.WorkingDay;
+import beautysalon.model.services.AppointmentsProcessor;
+import beautysalon.model.services.ProceduresProcessor;
+import beautysalon.model.services.ReviewsProcessor;
+import beautysalon.model.services.UserProcessor;
+import beautysalon.model.services.impl.AppointmentsService;
+import beautysalon.model.services.impl.ProceduresService;
+import beautysalon.model.services.impl.ReviewsService;
+import beautysalon.model.services.impl.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -14,28 +18,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/client")
 public class ClientController {
-    private AppointmentsService appointmentsService;
-    private ProceduresService proceduresService;
-    private ReviewsService reviewsService;
-    private UserService userService;
-    private ReviewRepository reviewRepository;
+    private AppointmentsProcessor appointmentsService;
+    private ProceduresProcessor proceduresService;
+    private ReviewsProcessor reviewsService;
+    private UserProcessor userService;
 
     public ClientController(AppointmentsService appointmentsService,
                             ProceduresService proceduresService,
                             ReviewsService reviewsService,
-                            UserService userService,
-                            ReviewRepository reviewRepository) {
+                            UserService userService) {
         this.appointmentsService = appointmentsService;
         this.proceduresService = proceduresService;
         this.reviewsService = reviewsService;
         this.userService = userService;
-        this.reviewRepository = reviewRepository;
     }
 
     @GetMapping("/menu")
@@ -58,19 +62,23 @@ public class ClientController {
 
     @GetMapping("/make-appointment")
     public String makeAppointment(Model model,
-//                                  List<WorkingDay> workingDays,
+                                  @RequestParam(required = false) List<LocalDate> workingDays,
                                   String surnameEn) {
+
         model.addAttribute("masters", userService.getUsersByRole("master"));
         model.addAttribute("surnameEn", surnameEn);
-        model.addAttribute("workingDays", userService.getAvailableMasterWorkingDays(surnameEn));
-        return "client-master-schedule";
+        model.addAttribute("workingDays", workingDays);
+        return "/schedule/client-master-schedule";
     }
 
     @PostMapping("/make-appointment/choose-master")
     public String chooseDateByMaster(Model model, String surnameEn) {
-        model.addAttribute("surnameEn", surnameEn);
-//        model.addAttribute("workingDays", userService.getAvailableMasterWorkingDays(surnameEn));
-        return makeAppointment(model, surnameEn);
+        List<WorkingDay> workingDays = userService.getAvailableMasterWorkingDays(surnameEn);
+
+        List<LocalDate> dates = new ArrayList<>();
+
+        workingDays.forEach(day -> dates.add(day.getDate()));
+        return makeAppointment(model, dates, surnameEn);
     }
 
     @GetMapping("/procedures")

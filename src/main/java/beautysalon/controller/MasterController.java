@@ -1,10 +1,9 @@
 package beautysalon.controller;
 
-import beautysalon.model.entities.Appointment;
 import beautysalon.model.entities.User;
-import beautysalon.model.services.AppointmentsService;
-import beautysalon.model.services.ProceduresService;
-import beautysalon.model.services.WorkingDayService;
+import beautysalon.model.services.AppointmentsProcessor;
+import beautysalon.model.services.ProceduresProcessor;
+import beautysalon.model.services.WorkingDayProcessor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,18 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/master")
 public class MasterController {
-    private AppointmentsService appointmentsService;
-    private ProceduresService proceduresService;
-    private WorkingDayService workingDayService;
+    private AppointmentsProcessor appointmentsService;
+    private ProceduresProcessor proceduresService;
+    private WorkingDayProcessor workingDayService;
 
-    public MasterController(AppointmentsService appointmentsService,
-                            ProceduresService proceduresService,
-                            WorkingDayService workingDayService) {
+    public MasterController(AppointmentsProcessor appointmentsService,
+                            ProceduresProcessor proceduresService,
+                            WorkingDayProcessor workingDayService) {
         this.appointmentsService = appointmentsService;
         this.proceduresService = proceduresService;
         this.workingDayService = workingDayService;

@@ -1,10 +1,10 @@
 package beautysalon.model.entities;
 
+import beautysalon.controller.LocalDateConverter;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Getter
@@ -28,6 +28,7 @@ public class Appointment {
     @JoinColumn(name = "appointment_master_id", nullable = false)
     private User masterId;
 
+    @Convert(converter = LocalDateConverter.class)
     @Column(name = "appointment_date", nullable = false)
     private LocalDate date;
 

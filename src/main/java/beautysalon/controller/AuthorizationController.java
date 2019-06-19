@@ -2,6 +2,8 @@ package beautysalon.controller;
 
 import beautysalon.model.entities.User;
 import beautysalon.model.repositories.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,5 +59,14 @@ public class AuthorizationController {
             userRepository.save(user);
             return "redirect:/login";
         }
+    }
+
+    @GetMapping("/delete-account")
+    public String deleteAccount() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
+        userRepository.delete(user);
+        return "/home-page";
     }
 }

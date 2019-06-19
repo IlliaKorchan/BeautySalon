@@ -1,18 +1,4 @@
-<#--<%---->
-<#--Created by IntelliJ IDEA.-->
-<#--User: koill-->
-<#--Date: 05.06.2019-->
-<#--Time: 12:57-->
-<#--To change this template use File | Settings | File Templates.-->
-<#----%>-->
-<#--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
-<#--<%@ taglib uri='http://java.sun.com/jsp/jstl/fmt' prefix='fmt'%>-->
-<#--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>-->
-<#--<c:set var="language"-->
-       <#--value="${not empty param.language ? param.language : not empty language ? language : 'en'}"-->
-       <#--scope="session"/>-->
-<#--<fmt:setLocale value="${language}"/>-->
-<#--<fmt:setBundle basename="message"/>-->
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,34 +17,31 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light sticky-top"
      style="background-color: #FFE3F5 ">
-    <#--<a href="${pageContext.request.contextPath}/salon/menu" class="navbar-brand">-->
-        <#--<img src="https://image.freepik.com/free-vector/_53876-43323.jpg" width="30" height="30" alt="logo">-->
-    <#--</a>-->
-    <#--<a href="${pageContext.request.contextPath}/salon/client-appointments" class="navbar-brand letter"-->
-       <#--style="color: deeppink; font-size:11pt"><fmt:message key="navbar.my.appointments"/></a>-->
-    <#--<a href="${pageContext.request.contextPath}/salon/client-master-schedule" class="navbar-brand letter"-->
-       <#--style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.appoint"/></a>-->
-    <#--<a href="${pageContext.request.contextPath}/salon/procedures" class="navbar-brand letter"-->
-       <#--style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.procedures"/></a>-->
-    <#--<a href="${pageContext.request.contextPath}/salon/client-reviews" class="navbar-brand letter"-->
-       <#--style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.review"/></a>-->
-    <#--<a href="${pageContext.request.contextPath}/logout" class="navbar-brand letter"-->
-       <#--style="color: deeppink; font-size:11pt"><fmt:message key="navbar.logout"/></a>-->
-    <#--<form method="get" action="${pageContext.request.contextPath}/change-language/salon/client-master-schedule">-->
-        <#--<label for="language"></label>-->
-        <#--<select id="language" name="language"-->
-                <#--onchange="submit()" style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">-->
-            <#--<option value="en" ${language == 'en' ? 'selected' : ''} style="color: deeppink">English</option>-->
-            <#--<option value="uk" ${language == 'uk' ? 'selected' : ''} style="color: deeppink">Українська</option>-->
-        <#--</select>-->
-    <#--</form>-->
+    <a href="/client/menu" class="navbar-brand">
+        <img src="https://image.freepik.com/free-vector/_53876-43323.jpg" width="30" height="30" alt="logo">
+    </a>
+    <a href="/client/appointments" class="navbar-brand letter"
+       style="color: deeppink; font-size:11pt">My appointments</a>
+    <a href="/client/make-appointment" class="navbar-brand letter"
+       style="color: deeppink; font-size:11pt" >Make an appointment</a>
+    <a href="/client/procedures" class="navbar-brand letter"
+       style="color: deeppink; font-size:11pt" >Procedures</a>
+    <a href="/client/reviews" class="navbar-brand letter"
+       style="color: deeppink; font-size:11pt" >Write a review</a>
+    <form method="post" action="/logout">
+        <input type="hidden"  name="_csrf" value="${_csrf.token}" />
+        <p align="center"><button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
+            Logout
+        </button>
+        </p>
+    </form>
 </nav>
 <br>
 
 <form method="post" action="/client/make-appointment/choose-master">
     <p align="center" style="color: deeppink"> Choose master
         <#--<fmt:message key="choose.master"/><br>-->
-        <select id="masterSurname" name="surnameEn"
+        <select id="surnameEn" name="surnameEn"
                 style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
             <#list masters as m>
                 <option value="${m.surnameEn}">${m.surnameEn}</option>
@@ -73,14 +56,15 @@
     </p>
 </form>
 
-<form method="post" action="">
+<#--<form method="post" action="">-->
     <p style="color: deeppink" align="center"><fmt:message key="choose.date"/><br>
-        <select id="date" name="workingDays"
+        <select id="workingDays" name="workingDays"
                 style="font-size: 11pt; background-color: #FFE3F5; color: deeppink" onchange="">
             <#list workingDays as w>
-                <#list w.masterId as master>
-                <option value="${master.surnameEn}">${master.surnameEn}</option>
-                </#list>
+                <#--<#list w.masterId as master>-->
+                <#--<option value="${master.surnameEn}">${master.surnameEn}</option>-->
+                <option value="${w}">${w}</option>
+                <#--</#list>-->
             </#list>
             <#--<c:forEach var="day" items="${requestScope.workingDays}">-->
                 <#--<option value="${day}" style="color: deeppink">${day}</option>-->
@@ -89,10 +73,10 @@
         <br><br>
         <button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
             <input type="hidden" value="_csrf" >
-            <fmt:message key="button.find"/>
+            Find
         </button>
     </p>
-</form>
+<#--</form>-->
 
 <#--<form method="post" action="${pageContext.request.contextPath}/salon/make-appointment">-->
     <#--<p align="center"><fmt:message key="choose.procedure"/><br>-->

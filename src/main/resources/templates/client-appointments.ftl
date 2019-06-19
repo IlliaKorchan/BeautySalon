@@ -21,7 +21,7 @@
     </a>
     <a href="/client/appointments" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt">My appointments</a>
-    <a href="/client/master-schedule" class="navbar-brand letter"
+    <a href="/client/make-appointment" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" >Make an appointment</a>
     <a href="/client/procedures" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" >Procedures</a>
